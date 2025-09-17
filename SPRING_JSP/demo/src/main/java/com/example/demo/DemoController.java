@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller // 컨트롤러 어노테이션 명시
 public class DemoController{
 
-    @GetMapping("/")
-    public String index() {
-        return "index1";  // index1.html을 렌더링
-    }
+    // @GetMapping("/")
+    // public String index() {
+    //     return "index1";  // index1.html을 렌더링
+    // }
     
     @GetMapping("/hello") // 전송 방식 GET
     public String hello(Model model) {
@@ -28,5 +28,10 @@ public class DemoController{
         model.addAttribute("data4", "날씨는.");
         model.addAttribute("data5", "매우 좋습니다.");
         return "hello2";
+    }
+
+    @GetMapping("/about_detailed")
+    public String about() {
+        return "about_detailed";
     }
 }
