@@ -18,7 +18,7 @@ A few resources to get you started if this is your first Flutter project:
 
 ### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
 
-```
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -35,7 +35,7 @@ A few resources to get you started if this is your first Flutter project:
 -> hello.html
 
 
-```
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
