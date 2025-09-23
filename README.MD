@@ -16,7 +16,9 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 2주차
 
-### 2주차 퀴즈
+### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
+
+
 
 ## 3주차
 
