@@ -16,7 +16,59 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 2주차
 
-### 2주차 퀴즈
+### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello 페이지</title>
+</head>
+<body>
+    <h1>안녕하세요!</h1>
+    <p th:text="${data}"></p>
+    <a href = "/hello2">두번째 헬로 페이지</a>
+</body>
+</html>
+```
+-> hello.html
+
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello 페이지</title>
+</head>
+<body>
+    <h1>안녕하세요!</h1>
+    <p th:text="${data1}"></p>
+    <p th:text="${data2}"></p>
+    <p th:text="${data3}"></p>
+    <p th:text="${data4}"></p>
+    <p th:text="${data5}"></p>
+    <a href = "/hello">홈페이지 메인</a>
+</body>
+</html>
+```
+
+-> hello2.html
+
+```java
+@GetMapping("/hello2")
+    public String hello2(Model model){
+        model.addAttribute("data1", "홍길동님.");
+        model.addAttribute("data2", "방갑습니다.");
+        model.addAttribute("data3", "오늘.");
+        model.addAttribute("data4", "날씨는.");
+        model.addAttribute("data5", "매우 좋습니다.");
+        return "hello2";
+    }
+```
+
+-> DemoController.java
 
 ## 3주차
 
