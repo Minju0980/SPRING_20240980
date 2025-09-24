@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>테스트 페이지</title>
+</head>
+<body>
+    <h1>안녕하세요! 테스트 페이지</h1>
+     텍스트 출력(html 태그 인식)
+     <span th:utext="${data1}">message</span>
+     Input/select 등 태그의 값 지정
+     <input type="text" th:value="${data2}">
+     <input type="checkbox" th:field="*{data2}" th:value="true"> 동의합니다.
+     태그의 속성 값 여러 개 지정(링크는 @)
+     <p><a th:href="@{/posts/(id=${link})}">글 상세보기</a></p>
+
+     지역변수(태그 내에서만 동작)
+     <div th:with="first=${name}">
+     <p>리스트에서 처음 사람의 이름 = <span th:text="${first}"></span></p>
+     <div>
+     링크에 파라미터 추가하기(&를 ,로 표현)
+     <a th:href="@{/products/detail/(productId=${para1}, productId=${para2})}">상품 상세보기</a>
+
+
+</body>
+</html>
+
