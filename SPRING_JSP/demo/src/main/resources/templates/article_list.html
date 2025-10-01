@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <meta charset="UTF-8">
+    <title>블로그 게시판</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div class="container">
+        <h1 class="mt-5">블로그 게시판</h1>
+        <!-- 게시글 리스트 -->
+        <div class="mt-5">
+            <h2>게시글 목록</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>제목</th>
+                        <th>내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr th:each="article : ${articles}">
+                        <td th:text="${article.id}"></td>
+                        <td th:text="${article.title}"></td>
+                        <td th:text="${article.content}"></td>
+                    </tr>
+</tbody>
+</table>
+</div>
+
+<!-- 게시글 추가 폼 -->
+<div class="mt-4">
+    <h2>게시글 추가</h2>
+    <form th:action="@{/api/articles}" method="post" name="content">
+        <div class="form-group">
+            <label for="title">제목:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+            <div class="form-group">
+            <label for="content">내용:</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">추가</button>
+    </form>
+</div>
+
+
+</div>
+</body>
+</html>
