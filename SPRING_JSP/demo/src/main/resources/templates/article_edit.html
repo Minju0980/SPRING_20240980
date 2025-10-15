@@ -21,38 +21,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="article : ${articles}">
+                    <tr th:each="article : ${article}">
                         <td th:text="${article.id}"></td>
                         <td th:text="${article.title}"></td>
                         <td th:text="${article.content}"></td>
                         <!-- 수정/삭제 버튼 -->
                         <td>
                             <a class="btn btn-warning" th:href="@{/article_edit/{id}(id=${article.id})}">수정</a>
-                            <form th:action="@{/api/article_delete/{id}(id=${article.id})}" method="post" style="display:inline;">
-                                <input type="hidden" name="_method" value="delete">
-                                <button type="submit" class="btn btn-danger">삭제</button>
-                            </form>
+                            <a class="btn btn-warning" th:href="@{/article_edit/{id}(id=${article.id})}">삭제</a>
                         </td>
                     </tr>
 </tbody>
 </table>
 </div>
 
-<!-- 게시글 추가 폼 -->
-<div class="mt-4">
-    <h2>게시글 추가</h2>
-    <form th:action="@{/api/articles}" method="post" name="content">
-        <div class="form-group">
-            <label for="title">제목:</label>
-            <input type="text" class="form-control" id="title" name="title" required>
-        </div>
+    <!-- 게시글 수정 폼 -->
+    <div class="mt-4">
+        <h2>게시글을 수정 합니다.</h2>
+        <form th:action="@{/api/article_edit/{id}(id=${article.id})}" method="post" name="content">
+            <input type="hidden" name="_method" value="put">
             <div class="form-group">
-            <label for="content">내용:</label>
-            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">추가</button>
-    </form>
-</div>
+                <label for="title">제목:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">내용:</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">수정</button>
+        </form>
+    </div>
 
 
 </div>
