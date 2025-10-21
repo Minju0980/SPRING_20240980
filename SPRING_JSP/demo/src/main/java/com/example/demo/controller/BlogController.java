@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller // 컨트롤러 어노테이션 명시
@@ -55,5 +56,12 @@ public class BlogController{
     public String deleteArticle(@PathVariable Long id) {
         blogService.delete(id);
         return "redirect:/article_list";
+    }
+
+    //5주차 퀴즈
+    @PostMapping("/api/articles")
+    public String addArticle(@ModelAttribute AddArticleRequest request) {
+        blogService.save(request);              
+        return "redirect:/article_list";       
     }
 }
