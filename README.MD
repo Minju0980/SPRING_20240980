@@ -14,9 +14,11 @@ A few resources to get you started if this is your first Flutter project:
 
 - 실행 및 깃 허브 연동 확인 완료!
 
-## 2주차
+## 2주차 (개발환경 설정 및 테스트)
 
 ### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
+
+- 기존 hello.html 링크를 수정한다.
 
 ```html
 <!DOCTYPE html>
@@ -70,16 +72,16 @@ A few resources to get you started if this is your first Flutter project:
 
 -> DemoController.java
 
-## 3주차
+## 3주차 (포트폴리오 작성하기 - 프론트)
 
-### 3주차 퀴즈
+### 3주차 퀴즈 (상세 페이지 수정하기)
 
-## 4주차
+## 4주차 (데이터베이스 연동 및 테스트)
 
-### 4주차 퀴즈
+### 4주차 퀴즈 (사용자 추가 및 출력하기)
 
-## 5주차
+## 5주차 (블로그 게시판 - 1)
 
-### 5주차 퀴즈
+### 5주차 퀴즈 (페이지 리다이렉트)
 
-## 6주차
+## 6주차 (블로그 게시판 - 2)
