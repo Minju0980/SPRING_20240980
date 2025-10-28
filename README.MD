@@ -40,6 +40,21 @@ A few resources to get you started if this is your first Flutter project:
 
 -> 링크 클릭시 서버의 /hello2 경로로 이동하며 두번째 헬로 페이지를 보여준다.
 
+```java
+@GetMapping("/hello2")
+    public String hello2(Model model){
+        model.addAttribute("data1", "홍길동님.");
+        model.addAttribute("data2", "방갑습니다.");
+        model.addAttribute("data3", "오늘.");
+        model.addAttribute("data4", "날씨는.");
+        model.addAttribute("data5", "매우 좋습니다.");
+        return "hello2";
+    }
+```
+
+-> @GetMapping("/hello2")는 /hello2라는 URL 요청 경로를 hello2 메드에 매핑하는 어노테이션이다.
+
+-> addAttribute 메서드는 모델에 데이터를 추가한다./ 5개의 속성을 각자 추가했다.
 
 ```html
 <!DOCTYPE html>
@@ -62,21 +77,6 @@ A few resources to get you started if this is your first Flutter project:
 
 -> 5개의 속성변수(data1~data5)을 출력한다./ 링크 클릭시 /hello 경로로 이동하며 홈페이지 메인으로 돌아가게 된다.
 
-```java
-@GetMapping("/hello2")
-    public String hello2(Model model){
-        model.addAttribute("data1", "홍길동님.");
-        model.addAttribute("data2", "방갑습니다.");
-        model.addAttribute("data3", "오늘.");
-        model.addAttribute("data4", "날씨는.");
-        model.addAttribute("data5", "매우 좋습니다.");
-        return "hello2";
-    }
-```
-
--> @GetMapping("/hello2")는 /hello2라는 URL 요청 경로를 hello2 메드에 매핑하는 어노테이션이다.
-
--> addAttribute 메서드는 모델에 데이터를 추가한다./ 5개의 속성을 각자 추가했다.
 
 ## 3주차 (포트폴리오 작성하기 - 프론트)
 
