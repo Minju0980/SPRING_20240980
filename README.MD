@@ -34,7 +34,11 @@ A few resources to get you started if this is your first Flutter project:
 </body>
 </html>
 ```
--> hello.html
+-> Thymeleaf 템플릿 엔진을 사용하겠다고 선언한다./ 브라우저에 "안녕하세요!"라는 큰 제목을 출력한다.
+
+-> th:text = "${data}"에서 컨트롤러가 전달한 모델 객체의 데이터를 data라는 이름으로 받아 HTML에 출력한다.
+
+-> 링크 클릭시 서버의 /hello2 경로로 이동하며 두번째 헬로 페이지를 보여준다.
 
 
 ```html
@@ -56,7 +60,7 @@ A few resources to get you started if this is your first Flutter project:
 </html>
 ```
 
--> hello2.html
+-> 5개의 속성변수(data1~data5)을 출력한다./ 링크 클릭시 /hello 경로로 이동하며 홈페이지 메인으로 돌아가게 된다.
 
 ```java
 @GetMapping("/hello2")
@@ -70,7 +74,9 @@ A few resources to get you started if this is your first Flutter project:
     }
 ```
 
--> DemoController.java
+-> @GetMapping("/hello2")는 /hello2라는 URL 요청 경로를 hello2 메드에 매핑하는 어노테이션이다.
+
+-> addAttribute 메서드는 모델에 데이터를 추가한다./ 5개의 속성을 각자 추가했다.
 
 ## 3주차 (포트폴리오 작성하기 - 프론트)
 
