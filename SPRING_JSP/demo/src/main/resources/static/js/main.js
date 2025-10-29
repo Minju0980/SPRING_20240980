@@ -123,17 +123,19 @@
 
 // 3주차 퀴즈
  //창 닫기 확인 함수
+    function confirmClose() {
+        if (confirm("창을 닫으시겠습니까?")) {
+            window.close();
+            window.location.href = "/";
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function(){
         var btnClose = document.getElementById("btnClose");
-        if(btnClose){      //버튼이 있을때만 이벤트 실행
-            btnClose.addEventListener("click", function(){
-                if(confirm("창을 닫으시겠습니까?")) {
-                    window.close();
-                    window.location.href="/";
-                }
-           })
+        if (btnClose) {
+            btnClose.addEventListener("click", confirmClose);
         }
-    })
+    });
 
 })(jQuery);
 
