@@ -163,6 +163,21 @@ function confirmClose() {
 
 ### 5주차 퀴즈 (페이지 리다이렉트)
 
+- 기존 RestController는 주석처리/BlogController.java에 맵핑을 추가한다.
+- 리턴 타입은 String/ return "redirect:/article_list";
+
+```java
+@PostMapping("/api/articles")
+    public String addArticle(@ModelAttribute AddArticleRequest request) {
+        blogService.save(request);              
+        return "redirect:/article_list";       
+    }
+```
+-> 브라우저가 /api/articles 경로로 POST 요청을 보냈을 때 addArticle()메서드가 실행되도록 매핑한다.
+
+-> blogService의 save()를 호출하여 전달받은 request 데이터를 DB에 저장하는 역할을 한다.
+
+-> 게시글을 DB에 저장한 후, 리다이렉트로 사용자를 /article_list 페이지로 자동 이동시킨다.
 
 
 ## 6주차 (블로그 게시판 - 2)
