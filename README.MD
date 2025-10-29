@@ -94,20 +94,27 @@ A few resources to get you started if this is your first Flutter project:
 -> 이 버튼은 자바스크립트로 클릭 이벤트를 연결해 동작하도록 만든 코드이다.
 
 ```javascript
-document.addEventListener("DOMContentLoaded", function(){
-        var btnClose = document.getElementById("btnClose");
-        if(btnClose){      //버튼이 있을때만 이벤트 실행
-            btnClose.addEventListener("click", function(){
-                if(confirm("창을 닫으시겠습니까?")) {
-                    window.close();
-                    window.location.href="/";
-                }
-           })
+function confirmClose() {
+        if (confirm("창을 닫으시겠습니까?")) {
+            window.close();
+            window.location.href = "/";
         }
-    })
+    }
 
-})(jQuery);
+    document.addEventListener("DOMContentLoaded", function(){
+        var btnClose = document.getElementById("btnClose");
+        if (btnClose) {
+            btnClose.addEventListener("click", confirmClose);
+        }
+    });
 ```
+-> confirmClose()으로 사용자가 클릭했을 때 실행될 기능을 함수로 정의한다. 
+
+-> confirm()은 브라우저에서 확인/취소 대화상자를 띄우는 함수이다. 확인을 누르면 true를 반환하고 취소를 누르면 false를 반환한다. 확인을 누른 경우에만 {}안의 코드가 실행된다.
+
+-> btnClose 버튼이 클릭될 때마다 confirmClose() 함수를 실행하도록 연결한다.
+
+-> '되돌아가기' 버튼을 눌렀을 때 창을 닫을지 물어보는 확인창을 띄우고 확인을 누르면 창을 닫고 홈으로 이동하게 만들었다.
 
 ## 4주차 (데이터베이스 연동 및 테스트)
 
