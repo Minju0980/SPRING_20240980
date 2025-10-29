@@ -164,7 +164,7 @@ function confirmClose() {
 ### 5주차 퀴즈 (페이지 리다이렉트)
 
 - 기존 RestController는 주석처리/BlogController.java에 맵핑을 추가한다.
-- 리턴 타입은 String/ return "redirect:/article_list";
+- 리턴 타입은 String/ 리턴: return "redirect:/article_list";
 
 ```java
 @PostMapping("/api/articles")
