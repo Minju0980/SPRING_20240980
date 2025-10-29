@@ -120,6 +120,9 @@ function confirmClose() {
 
 ### 4주차 퀴즈 (사용자 추가 및 출력하기)
 
+- 2명의 사용자를 db에서 직접 추가한다. INSERT 문을 활용한다.
+홍길동 이외의 토마토, 기러기를 추가했다.
+
 ```java
 @GetMapping("/testdb")
     public String getAllTestDBs(Model model) {
@@ -137,6 +140,24 @@ function confirmClose() {
         return "testdb";
     }
 ```
+
+-> 사용자가 브라우저에서 /testdb 경로로 GET 요청을 보내면 메서드 getAllTestDBs()가 실행되도록 매핑한다.
+
+-> TestService를 통해 DB에서 이름이 "홍길동"인 데이터를 찾아서 반환한다. 결과는 TestDB 타입의 객체로 저장된다./ 같은 방식으로 "토마토", "기러기" 데이터도 각각 조회한다.
+
+```html
+<h1>User List</h1>
+
+    <p>아이디(기본키) : <span th:text="${data1.id}"></span></p>
+    <p>이름 : <span th:text="${data1.name}"></span></p>
+
+    <p>아이디(기본키) : <span th:text="${data2.id}"></span></p>
+    <p>이름 : <span th:text="${data2.name}"></span></p>
+
+    <p>아이디(기본키) : <span th:text="${data3.id}"></span></p>
+    <p>이름 : <span th:text="${data3.name}"></span></p>
+```
+-> TestDB 테이블에서 조회한 세 명의 사용자 데이터를 data1, data2, data3 모델 속성으로 받아와 각각의 id와 이름을 표시한다.
 
 ## 5주차 (블로그 게시판 - 1)
 
