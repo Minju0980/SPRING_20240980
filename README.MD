@@ -52,7 +52,7 @@ A few resources to get you started if this is your first Flutter project:
     }
 ```
 
--> @GetMapping("/hello2")는 /hello2라는 URL 요청 경로를 hello2 메드에 매핑하는 어노테이션이다.
+-> @GetMapping("/hello2")는 /hello2라는 URI 경로를 hello2 메서드에 매핑하는 어노테이션이다.
 
 -> addAttribute 메서드는 모델에 데이터를 추가한다./ 5개의 속성을 각자 추가했다.
 
@@ -81,6 +81,27 @@ A few resources to get you started if this is your first Flutter project:
 ## 3주차 (포트폴리오 작성하기 - 프론트)
 
 ### 3주차 퀴즈 (상세 페이지 수정하기)
+
+```
+<a id="btnClose" class="btn btn-primary py-3 px-5" href="javascript(0);">되돌아가기</a>
+```
+
+
+```
+document.addEventListener("DOMContentLoaded", function(){
+        var btnClose = document.getElementById("btnClose");
+        if(btnClose){      //버튼이 있을때만 이벤트 실행
+            btnClose.addEventListener("click", function(){
+                if(confirm("창을 닫으시겠습니까?")) {
+                    window.close();
+                    window.location.href="/";
+                }
+           })
+        }
+    })
+
+})(jQuery);
+```
 
 ## 4주차 (데이터베이스 연동 및 테스트)
 
