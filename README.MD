@@ -82,12 +82,12 @@ A few resources to get you started if this is your first Flutter project:
 
 ### 3주차 퀴즈 (상세 페이지 수정하기)
 
-```
+```html
 <a id="btnClose" class="btn btn-primary py-3 px-5" href="javascript(0);">되돌아가기</a>
 ```
 
 
-```
+```javascript
 document.addEventListener("DOMContentLoaded", function(){
         var btnClose = document.getElementById("btnClose");
         if(btnClose){      //버튼이 있을때만 이벤트 실행
