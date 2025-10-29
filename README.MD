@@ -82,10 +82,16 @@ A few resources to get you started if this is your first Flutter project:
 
 ### 3주차 퀴즈 (상세 페이지 수정하기)
 
+- 버튼을 클릭하면 현재 창을 닫는다.
+- 창을 닫을지 물어본다
+
 ```html
 <a id="btnClose" class="btn btn-primary py-3 px-5" href="javascript(0);">되돌아가기</a>
 ```
 
+-> 부트스트랩 버튼 형태 링크이며 사용자가 클릭할 수 있는 버튼의 이름은 '되돌아가기'이다.
+
+-> 이 버튼은 자바스크립트로 클릭 이벤트를 연결해 동작하도록 만든 코드이다.
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function(){
