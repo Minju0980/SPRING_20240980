@@ -120,6 +120,24 @@ function confirmClose() {
 
 ### 4주차 퀴즈 (사용자 추가 및 출력하기)
 
+```java
+@GetMapping("/testdb")
+    public String getAllTestDBs(Model model) {
+        TestDB user1 = testService.findByName("홍길동");
+        TestDB user2 = testService.findByName("토마토");
+        TestDB user3 = testService.findByName("기러기");
+
+        model.addAttribute("data1", user1);
+        model.addAttribute("data2", user2);
+        model.addAttribute("data3", user3);
+
+        System.out.println("데이터 출력 디버그 : " + user1);
+        System.out.println("데이터 출력 디버그 : " + user2);
+        System.out.println("데이터 출력 디버그 : " + user3);
+        return "testdb";
+    }
+```
+
 ## 5주차 (블로그 게시판 - 1)
 
 ### 5주차 퀴즈 (페이지 리다이렉트)
