@@ -98,6 +98,7 @@ public class BlogController{
     //     return "redirect:/article_list";       
     // }
 
+    //7주차 퀴즈
     @GetMapping("/board_edit/{id}")
     public String board_edit(Model model, @PathVariable Long id) {
         Optional<Board> opt = blogService.findById(id);

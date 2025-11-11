@@ -56,6 +56,7 @@ public class BlogService {
         blogRepository.deleteById(id);
     }
 
+    //7주차 퀴즈
     public void updateBoard(Long id, AddArticleRequest request) {
         Optional<Board> opt = blogRepository2.findById(id);
         if(opt.isPresent()){
