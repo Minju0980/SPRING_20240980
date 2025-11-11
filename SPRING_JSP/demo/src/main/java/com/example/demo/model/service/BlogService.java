@@ -3,7 +3,6 @@ package com.example.demo.model.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.domain.Article;
 import com.example.demo.model.domain.Board;
@@ -27,15 +26,15 @@ public class BlogService {
         return blogRepository2.findAll();
     }
 
-        public Article save(AddArticleRequest request){
-            // DTO가 없는 경우 이곳에 직접 구현 가능
-            // public ResponseEntity<Article> addArticle(@RequestParam String title, @RequestParam String content) {
-            // Article article = Article.builder()
-            // .title(title)
-            // .content(content)
-            // .build();
-            return blogRepository.save(request.toEntity());
-    }
+    //     public Article save(AddArticleRequest request){
+    //         // DTO가 없는 경우 이곳에 직접 구현 가능
+    //         // public ResponseEntity<Article> addArticle(@RequestParam String title, @RequestParam String content) {
+    //         // Article article = Article.builder()
+    //         // .title(title)
+    //         // .content(content)
+    //         // .build();
+    //         return blogRepository.save(request.toEntity());
+    // }
 
     // public Optional<Article> findById(Long id) { // 게시판 특정 글 조회
     //     return blogRepository.findById(id);
@@ -55,6 +54,27 @@ public class BlogService {
 
     public void delete(Long id){
         blogRepository.deleteById(id);
+    }
+
+    public void updateBoard(Long id, AddArticleRequest request) {
+        Optional<Board> opt = blogRepository2.findById(id);
+        if(opt.isPresent()){
+            Board board = opt.get();
+
+            String title = request.getTitle() !=null ? request.getTitle() : board.getTitle();
+            String content = request.getContent() != null ? request.getContent() : board.getContent();
+            String user    = request.getUser()    != null ? request.getUser()    : board.getUser();
+            String newdate = request.getNewdate() != null ? request.getNewdate() : board.getNewdate();
+            String count   = request.getCount()   != null ? request.getCount()   : board.getCount();
+            String likec   = request.getLikec()   != null ? request.getLikec()   : board.getLikec();
+
+            board.update(title, content, user, newdate, count, likec);
+            blogRepository2.save(board);
+        }
+    }
+
+    public void deleteBoard(Long id) {
+        blogRepository2.deleteById(id);
     }
 
 }

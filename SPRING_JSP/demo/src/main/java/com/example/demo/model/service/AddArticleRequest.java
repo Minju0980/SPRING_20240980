@@ -9,11 +9,15 @@ import com.example.demo.model.domain.Article;
 public class AddArticleRequest {
     private String title;
     private String content;
+    private String user;
+    private String newdate;
+    private String count;
+    private String likec;
 
-    public Article toEntity(){ // Article 객체 생성
-        return Article.builder()
-            .title(title)
-            .content(content)
-            .build();
-    }
+    // public Article toEntity(){ // Article 객체 생성
+    //     return Article.builder()
+    //         .title(title)
+    //         .content(content)
+    //         .build();
+    // }
 }

@@ -10,6 +10,7 @@ import com.example.demo.model.service.AddArticleRequest;
 import com.example.demo.model.service.BlogService;
 // import com.example.demo.model.service.TestService; // 최상단 서비스 클래스 연동 추가
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,10 +44,10 @@ public class BlogController{
 
     @GetMapping("/board_view/{id}") // 게시판 링크 지정
     public String board_view(Model model, @PathVariable Long id) {
-        Optional<Board> list = blogService.findById(id); // 선택한 게시판 글
+        Optional<Board> opt = blogService.findById(id); // 선택한 게시판 글
 
-        if (list.isPresent()) {
-            model.addAttribute("boards", list.get()); // 존재할 경우 실제 Board 객체를 모델에 추가
+        if (opt.isPresent()) {
+            model.addAttribute("boards", opt.get()); // 존재할 경우 실제 Board 객체를 모델에 추가
         } else {
             // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
             return "/error_page/article_error"; // 오류 처리 페이지로 연결
@@ -78,22 +79,45 @@ public class BlogController{
     //     return "article_edit";
     // }
 
-    @PutMapping("/api/article_edit/{id}")
-    public String updateArticle(@PathVariable Long id, @ModelAttribute AddArticleRequest request) {
-        blogService.update(id, request);
-        return "redirect:/article_list"; // 글 수정 이후 .html 연결
+    // @PutMapping("/api/article_edit/{id}")
+    // public String updateArticle(@PathVariable Long id, @ModelAttribute AddArticleRequest request) {
+    //     blogService.update(id, request);
+    //     return "redirect:/article_list"; // 글 수정 이후 .html 연결
+    // }
+
+    // @DeleteMapping("/api/article_delete/{id}")
+    // public String deleteArticle(@PathVariable Long id) {
+    //     blogService.delete(id);
+    //     return "redirect:/article_list";
+    // }
+
+    // //5주차 퀴즈
+    // @PostMapping("/api/articles")
+    // public String addArticle(@ModelAttribute AddArticleRequest request) {
+    //     blogService.save(request);              
+    //     return "redirect:/article_list";       
+    // }
+
+    @GetMapping("/board_edit/{id}")
+    public String board_edit(Model model, @PathVariable Long id) {
+        Optional<Board> opt = blogService.findById(id);
+        if(opt.isEmpty()) {
+            return "error_page/article_error";
+        }
+         model.addAttribute("boards", opt.get());
+        return "board_edit";
+    }
+       
+
+    @PutMapping("/api/board_edit/{id}")
+    public String updateBoard(@PathVariable Long id, @ModelAttribute AddArticleRequest request){
+        blogService.updateBoard(id, request);
+        return "redirect:/board_list";
     }
 
-    @DeleteMapping("/api/article_delete/{id}")
-    public String deleteArticle(@PathVariable Long id) {
-        blogService.delete(id);
-        return "redirect:/article_list";
-    }
-
-    //5주차 퀴즈
-    @PostMapping("/api/articles")
-    public String addArticle(@ModelAttribute AddArticleRequest request) {
-        blogService.save(request);              
-        return "redirect:/article_list";       
+    @DeleteMapping("/api/board_delete/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        blogService.deleteBoard(id);
+        return "redirect:/board_list";
     }
 }

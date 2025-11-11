@@ -185,3 +185,5 @@ function confirmClose() {
 ### 6주차 퀴즈
 
 ## 7주차
+
+### 7주차 퀴즈
