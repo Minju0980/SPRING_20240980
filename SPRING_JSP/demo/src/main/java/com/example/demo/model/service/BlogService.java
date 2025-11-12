@@ -3,6 +3,8 @@ package com.example.demo.model.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.domain.Article;
 import com.example.demo.model.domain.Board;
@@ -25,6 +27,19 @@ public class BlogService {
     public List<Board> findAll() { // 게시판 전체 목록 조회
         return blogRepository2.findAll();
     }
+
+    public Board save(AddArticleRequest request){
+    // DTO가 없는 경우 이곳에 직접 구현 가능
+    return blogRepository2.save(request.toEntity());
+    }
+
+    public Page<Board> findAll(Pageable pageable) {
+        return blogRepository2.findAll(pageable);
+    }
+
+    public Page<Board> searchByKeyword(String keyword, Pageable pageable) {
+        return blogRepository2.findByTitleContainingIgnoreCase(keyword, pageable);
+    } // LIKE 검색 제공(대소문자 무시)
 
     //     public Article save(AddArticleRequest request){
     //         // DTO가 없는 경우 이곳에 직접 구현 가능
@@ -77,5 +92,6 @@ public class BlogService {
     public void deleteBoard(Long id) {
         blogRepository2.deleteById(id);
     }
+    
 
 }

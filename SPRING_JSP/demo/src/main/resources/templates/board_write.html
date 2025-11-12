@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <meta charset="UTF-8">
+    <title>NEW 블로그 게시판 - 글쓰기</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div class="container">
+        <h1 class="mt-5">NEW 블로그 게시판</h1>
+        <!-- 게시글 리스트 -->
+        <div class="mt-5">
+            <!-- 게시글 추가 폼 -->
+        <div class="mt-4">
+        <h2>게시글 추가(제목과 내용 입력)</h2>
+        <form th:action="@{/api/boards}" method="post" name="content">
+            <div class="form-group">
+                    <label for="title">제목:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                    <label for="content">내용:</label>
+                    <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">글 저장하기</button>
+            <input type="hidden" id="user" name="user" value="GUEST">
+            <input type="hidden" id="newdate" name="newdate" value="오늘날짜">
+            <input type="hidden" id="count" name="count" value="0">
+            <input type="hidden" id="likec" name="likec" value="0">
+            </form>
+        </div>
+            
+</div>
+
+
+
+
+
+</div>
+</body>
+</html>
