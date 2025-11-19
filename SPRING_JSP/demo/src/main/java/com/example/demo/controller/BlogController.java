@@ -47,7 +47,8 @@ public class BlogController{
 
     @GetMapping("/board_list") // 새로운 게시판 링크 지정
     public String board_list(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword) {
-        PageRequest pageable = PageRequest.of(page, 5); // 한 페이지의 게시글 수
+        int pageSize = 5;
+        PageRequest pageable = PageRequest.of(page, pageSize); // 한 페이지의 게시글 수
         Page<Board> list; // Page를 반환
 
         if (keyword.isEmpty()) {
@@ -55,10 +56,14 @@ public class BlogController{
         } else {
             list = blogService.searchByKeyword(keyword, pageable); // 키워드로 검색
         }
+
+        int startNum = (page * pageSize) + 1; //페이지 시작 번호 계산
+
         model.addAttribute("boards", list); // 모델에 추가
         model.addAttribute("totalPages", list.getTotalPages()); // 페이지 크기
         model.addAttribute("currentPage", page); // 페이지 번호
         model.addAttribute("keyword", keyword); // 키워드
+        model.addAttribute("startNum", startNum); //추가된 시작 번호
         return "board_list"; // .HTML 연결
     }
 

@@ -24,17 +24,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="board : ${boards}">
-                        <td th:text="${board.id}"></td>
+                    <tr>
+                        <td th:text="${boards.id}"></td>
                         <td>
-                            <a th:href="@{/board_view/{id}(id=${board.id})}">
-                                <span th:text="${board.title}"></span>
+                            <a th:href="@{/board_view/{id}(id=${boards.id})}">
+                                <span th:text="${boards.title}"></span>
                             </a>
                         </td>
-                        <td th:text="${board.user}"></td>
-                        <td th:text="${board.newdate}"></td>
-                        <td th:text="${board.count}"></td>
-                        <td th:text="${board.likec}"></td>
+                        <td th:text="${boards.user}"></td>
+                        <td th:text="${boards.newdate}"></td>
+                        <td th:text="${boards.count}"></td>
+                        <td th:text="${boards.likec}"></td>
                     </tr>
 </tbody>
 </table>
@@ -46,19 +46,20 @@
                 </tr>
             </thead>
                 <tbody>
-                    <tr th:each="board : ${boards}">
-                        <td th:text="${board.content}"></td>
+                    <tr>
+                        <td th:text="${boards.content}"></td>
                     </tr>
 
-                    <tr th:each="board : ${boards}">
+                    <tr>
                         <td>
                             <!-- 수정 버튼 -->
-                            <a class="btn btn-warning" th:href="@{/board_edit/{id}(id=${board.id})}">수정</a>
+                            <a class="btn btn-warning" th:href="@{/board_edit/{id}(id=${boards.id})}">수정</a>
                             <!-- 삭제 버튼 -->
-                            <form th:action="@{/api/board_delete/{id}(id=${board.id})}" method="post" style="display:inline;">
+                            <form th:action="@{/api/board_delete/{id}(id=${boards.id})}" method="post" style="display:inline;">
                                 <input type="hidden" name="_method" value="delete">
                                 <button type="submit" class="btn btn-danger">삭제</button>
                             </form>
+                            <a class = "btn btn-secondary" th:href="@{/board_list}">목록으로</a>
                         </td>
                     </tr>
 
