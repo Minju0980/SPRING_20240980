@@ -11,6 +11,8 @@ import com.example.demo.model.domain.Member;
 import com.example.demo.model.service.AddMemberRequest;
 import com.example.demo.model.service.MemberService;
 
+import jakarta.validation.Valid;
+
 @Controller // 컨트롤러 어노테이션 명시
 public class MemberController {
      @Autowired
@@ -22,7 +24,7 @@ public class MemberController {
     }
 
     @PostMapping("/api/members") // 회원 가입 저장
-    public String addmembers(@ModelAttribute AddMemberRequest request) {
+    public String addmembers(@Valid @ModelAttribute AddMemberRequest request) {
         memberService.saveMember(request);
         return "join_end"; // .HTML 연결/ 가입완료 페이지
     }
@@ -33,6 +35,7 @@ public class MemberController {
     }
 
     @PostMapping("/api/login_check") // 로그인(아이디, 패스워드) 체크
+    
     public String checkMembers(@ModelAttribute AddMemberRequest request, Model model) {
     try {
         Member member = memberService.loginCheck(request.getEmail(), request.getPassword()); // 패스워드 반환
