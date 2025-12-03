@@ -50,7 +50,7 @@
                         <td th:text="${boards.content}"></td>
                     </tr>
 
-                    <tr>
+                    <tr th:if ="${boards.user} == ${email}">
                         <td>
                             <!-- 수정 버튼 -->
                             <a class="btn btn-warning" th:href="@{/board_edit/{id}(id=${boards.id})}">수정</a>

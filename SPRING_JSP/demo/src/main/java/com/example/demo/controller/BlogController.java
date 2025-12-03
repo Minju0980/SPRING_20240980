@@ -82,23 +82,46 @@ public class BlogController{
     }
 
     @PostMapping("/api/boards") // 글쓰기 게시판 저장
-    public String addboards(@ModelAttribute AddArticleRequest request) {
-    blogService.save(request);
-    return "redirect:/board_list"; // .HTML 연결
+    public String addboards(@ModelAttribute AddArticleRequest request,HttpSession session) {
+
+        //1. 로그인 여부 확인 (안되어 있으면 로그인 페이지로)
+        String email = (String) session.getAttribute("email");
+        if(email == null){
+            return "redirect:/member_login";
+        }
+
+        request.setUser(email);
+
+        blogService.save(request);
+        return "redirect:/board_list"; // .HTML 연결
     }
 
 
     @GetMapping("/board_view/{id}") // 게시판 링크 지정
-    public String board_view(Model model, @PathVariable Long id) {
+    public String board_view(Model model, @PathVariable Long id,HttpSession session) {
         Optional<Board> opt = blogService.findById(id); // 선택한 게시판 글
 
-        if (opt.isPresent()) {
-            model.addAttribute("boards", opt.get()); // 존재할 경우 실제 Board 객체를 모델에 추가
-        } else {
-            // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
-            return "/error_page/article_error"; // 오류 처리 페이지로 연결
+        // if (opt.isPresent()) {
+        //     model.addAttribute("boards", opt.get()); // 존재할 경우 실제 Board 객체를 모델에 추가
+        // } else {
+        //     // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
+        //     return "/error_page/article_error"; // 오류 처리 페이지로 연결
+        // }
+        // return "board_view"; // .HTML 연결
+
+        if(opt.isEmpty()) {
+            return "/error_page/article_error"; //오류 처리 페이지로 이동
         }
-        return "board_view"; // .HTML 연결
+
+        //게시글
+        Board board = opt.get();
+        model.addAttribute("boards",board); 
+
+       //로그인한 사용자 이메일 추가
+       String email = (String) session.getAttribute("email");
+       model.addAttribute("email",email);
+
+        return "board_view"; 
     }
 
     // @GetMapping("/article_edit/{id}") // 게시판 링크 지정
