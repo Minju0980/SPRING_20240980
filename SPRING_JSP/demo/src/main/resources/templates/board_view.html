@@ -50,6 +50,7 @@
                         <td th:text="${boards.content}"></td>
                     </tr>
 
+                    <!--11주차 퀴즈-->
                     <tr th:if ="${boards.user} == ${email}">
                         <td>
                             <!-- 수정 버튼 -->
@@ -59,10 +60,13 @@
                                 <input type="hidden" name="_method" value="delete">
                                 <button type="submit" class="btn btn-danger">삭제</button>
                             </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <a class = "btn btn-secondary" th:href="@{/board_list}">목록으로</a>
                         </td>
                     </tr>
-
                 </tbody>
         </table>
 

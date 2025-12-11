@@ -81,18 +81,22 @@ public class BlogController{
         return "board_write";
     }
 
+    //11주차 퀴즈
     @PostMapping("/api/boards") // 글쓰기 게시판 저장
     public String addboards(@ModelAttribute AddArticleRequest request,HttpSession session) {
 
-        //1. 로그인 여부 확인 (안되어 있으면 로그인 페이지로)
+        //로그인 여부 확인 (안되어 있으면 로그인 페이지로)
         String email = (String) session.getAttribute("email");
         if(email == null){
             return "redirect:/member_login";
         }
 
+        //작성자 = 현재 로그인한 사용자(email)
         request.setUser(email);
 
+        //기존 저장 로직
         blogService.save(request);
+
         return "redirect:/board_list"; // .HTML 연결
     }
 
@@ -109,6 +113,7 @@ public class BlogController{
         // }
         // return "board_view"; // .HTML 연결
 
+        //11주차 퀴즈
         if(opt.isEmpty()) {
             return "/error_page/article_error"; //오류 처리 페이지로 이동
         }
