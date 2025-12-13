@@ -184,7 +184,66 @@ function confirmClose() {
 
 ### 6주차 퀴즈
 
+- 에러 페이지를 다시 확인, BlogController.java를 수정한다.
+- 새로운 예외용 에러 페이지가 필요하다. (화면 디자인은 동일)/ @ControllerAdvice를 등록하여 구현한다.
 
+```java
+@GetMapping("/article_edit/{id}") // 게시판 링크 지정
+    public String article_edit(Model model, @PathVariable String id) {
+        
+        // 숫자인지 아닌지 확인
+        if (!id.matches("\\d+")) { 
+        return "error_page/article_error"; 
+        }
+
+        // 문자열을 숫자로 바꿔 변환
+        Long longId = Long.parseLong(id);
+
+        //DB에서 게시글 찾기
+        Optional<Article> list = blogService.findById(longId);  // 선택한 게시판 글
+
+        //게시글이 없으면 에러 페이지
+        if (list.isEmpty()) {
+        return "error_page/article_error";
+        }
+
+        //정상일 때는 모델에 추가
+        model.addAttribute("article", list.get());
+        return "article_edit";
+    }
+
+```
+- BlogController.java 파일 수정
+
+-> id 값이 숫자 형식인지 검사하고 \\d+ 정규식은 하나 이상의 숫자를 의미한다. 만약 사용자가 /article_edit/abc처럼 문자나 특수문자를 넣었다면 에러 페이지로 이동시킨다.
+
+-> 데이터베이스의 Article 엔티티는 id가 Long타입이므로 변환이 필요하며 blogService.findById(longId)를 호출해서 데이터베이스에서 해당 id의 게시글을 찾는다.  
+
+-> 반환타입이 Optional<Article>이므로 값이 존재하지 않을 수 있다. Optional 객체가 비어있으면 존재하지 않는 게시글이라는 의미로 에러페이지로 이동하고 게시글이 존재한다면 해당 게시글 객체를 모델에 "article"이라는 이름으로 담는다.
+
+```java
+@ControllerAdvice
+public class GlobalControllerAdvice {
+
+    
+    @ExceptionHandler(Exception.class)
+    public String handleGeneralException(Exception ex, Model model) {
+
+        model.addAttribute("message", "잘못된 요청입니다. 다시 시도해주세요.");
+        return "error_page/article_type_error"; 
+    }
+}
+
+```
+- GlobalControllerAdvice.java 파일을 만들었다.
+
+-> @ControllerAdvice는 스프링의 전역 예외 처리용 어노테이션으로, 이 어노테이션이 붙은 클래스는 모든 컨트롤러에서 발생하는 예외를 공통적으로 처리할 수 있다.
+
+-> 예외가 발생하면 스프링이 자동으로 ex 매개변수에 예외 객체를 담아서 handleGeneralException 메서드를 실행한다.
+
+-> 예외 발생 시 이동할 HTML 페이지의 경로(error_page/article_type_error.html)를 지정한다.
+
+- error_page/article_type_error.html를 화면 디자인은 동일하게 만들었다.
 
 ## 7주차
 
