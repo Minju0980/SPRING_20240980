@@ -375,7 +375,7 @@ public void updateBoard(Long id, AddArticleRequest request) {
 - 컨트롤러로부터 시작 페이지를 전달
 - BlogController.java의 /board_list를 수정한다. 시작 변수를 board_list.html 페이지를 전달한다.
 - 예) int startNum = (page * pageSize) + 1;
-- 페이지 이동 시에도 전체 목록 순서 기준으로 연속 번호를 출력한다(1~5, 6~10...)
+- 페이지 이동 시에도 전체 목록 순서 기준으로 연속 번호를 출력한다(1-5, 6-10...)
 
 - BlogController.java
 
