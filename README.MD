@@ -368,19 +368,38 @@ public void updateBoard(Long id, AddArticleRequest request) {
 
 -> blogRepository2.save(board)로 변경된 Board 객체를 DB에 저장한다. 
 
+## 9주차 (게시판 - 검색과 페이징)
 
+### 9주차 퀴즈 (게시판 페이지 - 글번호 & 삭제)
 
-## 9주차
+- 컨트롤러로부터 시작 페이지를 전달
+- BlogController.java의 /board_list를 수정한다. 시작 변수를 board_list.html 페이지를 전달한다.
+- 예) int startNum = (page * pageSize) + 1;
+- 페이지 이동 시에도 전체 목록 순서서 기준으로 연속 번호를 출력한다(1~5, 6~10...)
 
-### 9주차 퀴즈
+- BlogController.java
 
-## 10주차
+```java
+int pageSize = 5;
+PageRequest pageable = PageRequest.of(page, pageSize); // 한 페이지의 게시글 수
 
-### 10주차 퀴즈
+...
 
-## 11주차
+int startNum = (page * pageSize) + 1; //페이지 시작 번호 계산
+...
+model.addAttribute("startNum", startNum); //추가된 시작 번호
 
+```
 
-## 12주차
+```html
+<tr th:each="board, stat : ${boards}">
+                        <td th:text="${startNum+stat.index}"></td>
+...
+</tr>
+```
+-> board.id는 DB의 기본키라서 중간에 삭제되면 1,2,4,7.. 처럼 연속되지 않을 수 있고 DB의 키 값은 사용자가 알 필요가 없다.
 
+-> 현재 페이지에 보이는 리스트 순서를 보여줘야 하기 때문에 페이지 시작 번호(startNum) + 현재 행 인덱스(stat.index)로 계산한다.
+
+-> 예) 1페이지(page=0) startNum=1 -> 1~5, 2패이지(page=1) s-> 예) 1페이지(page=0) startNum=1 -> 1~5, 2페이지(page=1) startNum=6 -> 6~10 
 ### 12주차 퀴즈
