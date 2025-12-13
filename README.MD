@@ -434,4 +434,50 @@ public void deleteBoard(Long id) {
 ```
 -> 기존 삭제 기능 방식과 동일하다. 폼은 DELETE 요청을 직접 보낼 수 없기 때문에 POST로 요청을 보내고 hidden 필드 _method=delete를 사용해 스프링에서 DELETE 요청으로 처리하도록 구현하였다.
 
+## 10주차 (로그인과 로그아웃)
+
+### 10주차 퀴즈 (입력값 필터링)
+
+- AddMemberRequest.java 수정하기
+- 입력값 필터링(내부 검증 동작 활성화)
+- @Valid, @Validated 추가
+- 각 필드마다 검증이 되는지 회원 가입 기능 확인하기(비밀번호, 나이 등 2가지 검증을 해보자)
+
+- AddMemberRequest.java
+
+```java
+
+    @NotBlank(message = "이름은 필수 입력값입니다.")
+    @Pattern(regexp = "^[^!@#$%^&*(),.?\":{}|<>]+$", message = "이름에는 특수문자를 사용할 수 없습니다.")
+    private String name;
+
+    @NotBlank(message = "이메일은 필수 입력값입니다.")
+    @Email(message = "올바른 이메일 형식을 입력하세요.")
+    private String email;
+
+    @NotBlank(message = "비밀번호는 필수 입력값입니다.")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$", message = "비밀번호는 8자 이상, 대문자와 소문자를 포함해야 합니다.")
+    private String password;
+
+    @Pattern(regexp = "^(19|[2-8][0-9]|90)$", message = "나이는 19세 이상 90세 이하만 입력 가능합니다.")
+    private String age;
+
+    private String mobile;
+
+    private String address;
+
+```
+-> 이름은 공백X, 특수문자X이기 때문에 @NotBlank와 정규식 검사를 위해 @Pattern(regexp =)를 사용하였다. ^~$은 전체 문자열 검사이며 !@#$%^&*(),.?":{}|<> 대괄호 안에 적힌 문자들을 금지한다.
+
+-> 이메일은 공백X, 이메일 형식이기 때문에 @NotBlank와 @Email을 사용하였다. 
+
+-> 비밀번호는 패턴O(8글자이상이고 대소문자를 포함해야 한다.)이기 때문에 @NotBlank와 @Pattern(regexp =)을 사용하였다. (?=.*[a-z])은 소문자 최소 1개 포함이고, (?=.*[A-Z])은 대문자 최소 1개 포함이다. .{8,}은 전체 길이 8자 이상이라는 뜻이다.
+
+-> 나이는 패턴O(19세이상 90세 이하)이기 때문에 @Pattern(regexp =)을 사용하였다. 19|[2-8][0-9]|90은 19, 20~89, 90을 허용한다는 의미이다.
+
+-> 모바일과 주소는 공백O이다.
+
+- Controller에 @Valid/ Service에 @Validated 및 메서드 파라미터 @Valid를 넣어서 DTO검증이 실제 실행되도록 하였다.
+
+
 
