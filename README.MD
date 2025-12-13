@@ -408,4 +408,30 @@ startNum + stat.index(0부터 시작하는 인덱스)를 사용해 페이지 이
 - 컨트롤러에 삭제 맵핑을 추가한다.
 - 맵핑 이름: api/board_delete(참고: 기존 삭제 기능과 동일)
 
+- BlogController.java
+
+```java
+@DeleteMapping("/api/board_delete/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        blogService.deleteBoard(id);
+        return "redirect:/board_list";
+    }
+```
+-> 사용자가 삭제 버튼을 누르면 /api/board_delete/{id}로 DELETE 요청이 전달되고 컨트롤러는 해당 게시글을 DB에서 삭제한 뒤 목록 페이지로 다시 이동시킨다.
+
+```java
+public void deleteBoard(Long id) {
+        blogRepository2.deleteById(id);
+    }
+```
+-> BlogService.java에서 삭제 처리를 한다.
+
+```html
+<form th:action="@{/api/board_delete/{id}(id=${boards.id})}" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">삭제</button>
+                            </form>
+```
+-> 기존 삭제 기능 방식과 동일하다. 폼은 DELETE 요청을 직접 보낼 수 없기 때문에 POST로 요청을 보내고 hidden 필드 _method=delete를 사용해 스프링에서 DELETE 요청으로 처리하도록 구현하였다.
+
 
