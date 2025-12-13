@@ -335,9 +335,40 @@ private String title;
             .build();
 ```
 
--> 게시글에 필요한 데이터들로, HTML 수정/등록 폼에서 입력받은 값들이 저장되는 변수들이다. 이 클래스는 요청 데이터(DTO) 역할을 한다.
+-> 게시글에 필요한 데이터들을 필드로 정의하였다. HTML 수정/등록 폼에서 입력받은 값들이 해당 변수들에 저장된다. 이 클래스는 요청 데이터를 담는 DTO 역할을 한다.
 
--> DTO를 Entity로 변환, 빌더 패턴으로 객체를 생성하였다. 폼에 입력된 값들을 DTO에 담고 DTO를 Entity로 변환하여 DB에 저장한다.
+-> toEntity() 메서드를 통해 DTO를 Entity로 변환, 빌더 패턴으로 객체를 생성하였다. 폼에 입력된 값들을 DTO에 담고 이를 Entity로 변환하여 DB에 저장되거나 수정하는 구조이다.
+
+- update 메서드의 추가된 4개 나머지 필드 null을 수정한다.(참고: 추가된 필드가 null을 허용하지 않는다.)
+
+- BlogService.java
+
+```java
+public void updateBoard(Long id, AddArticleRequest request) {
+        Optional<Board> opt = blogRepository2.findById(id);
+        if(opt.isPresent()){
+            Board board = opt.get();
+
+            String title = request.getTitle() !=null ? request.getTitle() : board.getTitle();
+            String content = request.getContent() != null ? request.getContent() : board.getContent();
+            String user    = request.getUser()    != null ? request.getUser()    : board.getUser();
+            String newdate = request.getNewdate() != null ? request.getNewdate() : board.getNewdate();
+            String count   = request.getCount()   != null ? request.getCount()   : board.getCount();
+            String likec   = request.getLikec()   != null ? request.getLikec()   : board.getLikec();
+
+            board.update(title, content, user, newdate, count, likec);
+            blogRepository2.save(board);
+        }
+    }
+```
+
+-> 게시글이 존재하는 경우에만 수정 로직을 실행하도록 하였다. Optional 안에 있는 Board 엔티티를 꺼내어 수정 대상으로 사용한다.
+
+-> request.getTitle() !=null ? request.getTitle() : board.getTitle()은 수정폼에서 새 값이 전달되었을 경우 해당 값을 사용한다. 값이 전달되지 않았을 경우(null) 기존 DB값을 그대로 유지하도록 한다. 같은 방식으로 추가된 모든 필드에 대해 null 처리를 적용하였다. null을 허용하지 않는다.
+
+-> blogRepository2.save(board)로 변경된 Board 객체를 DB에 저장한다. 
+
+
 
 ## 9주차
 
