@@ -403,7 +403,7 @@ model.addAttribute("startNum", startNum); //추가된 시작 번호
 -> DB id 대신 목록의 순서를 나타내는 번호를 출력한다. startNum = (page * pageSize) + 1로 현재 페이지의 시작 번호를 계산해 board_list.html로 전달한다. 
 startNum + stat.index(0부터 시작하는 인덱스)를 사용해 페이지 이동시에도 전체 순서 기준으로 연속 번호가 출력되도록 구현한다.
 
--> 예) 1페이지(page=0) startNum=1 -> 1~5, 2페이지 (page=1) startNum=6 -> 6~10
+-> 예) 1페이지(page=0) startNum=1 -> 1~5 / 2페이지 (page=1) startNum=6 -> 6~10
 
 - 컨트롤러에 삭제 맵핑을 추가한다.
 - 맵핑 이름: api/board_delete(참고: 기존 삭제 기능과 동일)
