@@ -6,30 +6,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Optional;
 
-import com.example.demo.model.domain.Article;
-import com.example.demo.model.domain.Board;
-import com.example.demo.model.service.AddArticleRequest;
 // import com.example.demo.model.domain.TestDB;
 import com.example.demo.model.service.BlogService;
 // import com.example.demo.model.service.TestService; // 최상단 서비스 클래스 연동 추가
 
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,7 +41,14 @@ public class FileController{
                 Files.createDirectories(uploadPath);
             }
             String sanitizedEmail = email.replaceAll("[^a-zA-Z0-9]", "_");
+
             Path filePath = uploadPath.resolve(sanitizedEmail + ".txt"); // 업로드 폴더에 .txt 이름 설정
+            //동일파일 있으면 _1,_2 붙이기
+            int index = 1;
+            while(Files.exists(filePath)){
+                filePath = uploadPath.resolve(sanitizedEmail + "_" + index + ".txt");
+                index++;
+            }
             System.out.println("File path: " + filePath); // 디버깅용 출력
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
