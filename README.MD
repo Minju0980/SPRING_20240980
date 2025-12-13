@@ -182,7 +182,7 @@ function confirmClose() {
 
 ## 6주차 (블로그 게시판 - 2)
 
-### 6주차 퀴즈
+### 6주차 퀴즈(예외처리)
 
 - 에러 페이지를 다시 확인, BlogController.java를 수정한다.
 - 새로운 예외용 에러 페이지가 필요하다. (화면 디자인은 동일)/ @ControllerAdvice를 등록하여 구현한다.
