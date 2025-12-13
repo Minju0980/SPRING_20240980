@@ -16,7 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 2주차 (개발환경 설정 및 테스트)
 
-- 스프링 부트 동작 과정에 대해서 배웠고 내부 컨테이너 전체 동작 과정에 대해서도 알게되었음음
+- 스프링 부트 동작 과정에 대해서 배웠고 내부 컨테이너 전체 동작 과정에 대해서도 알게되었음
 - Thymeleaf 문법 -> 텍스트 출력: <span th: text="${data}">, $<...> 변수 표현식
 
 ### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
