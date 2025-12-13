@@ -428,6 +428,7 @@ public void deleteBoard(Long id) {
 ```
 -> BlogService.java에서 삭제 처리를 한다.
 
+- board_view.html
 ```html
 <form th:action="@{/api/board_delete/{id}(id=${boards.id})}" method="post" style="display:inline;">
                                 <input type="hidden" name="_method" value="delete">
