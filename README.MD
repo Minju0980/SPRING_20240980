@@ -405,3 +405,7 @@ startNum + stat.index(0부터 시작하는 인덱스)를 사용해 페이지 이
 
 -> 예) 1페이지(page=0) startNum=1 -> 1~5, 2페이지 (page=1) startNum=6 -> 6~10
 
+- 컨트롤러에 삭제 맵핑을 추가한다.
+- 맵핑 이름: api/board_delete(참고: 기존 삭제 기능과 동일)
+
+
