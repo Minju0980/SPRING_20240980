@@ -397,6 +397,11 @@ public void updateBoard(Long id, AddArticleRequest request) {
 
 ## 9주차 (게시판 - 검색과 페이징)
 
+- 캐싱 서비스 지원: 자주 사용하는 데이터를 저장하여 재활용-> Ehcache(로컬), Redis(외부:분산)
+- findByTitleContaining 메서드: 단순 데이터 셋 검색에 적합, like 검색 가능, 대규모 검색 엔진에는 적합X
+- 페이징: 데이터를 페이지 단위로 나눠서 처리/ 주요 페이지 기능 제공/ 내부 기본값 설정 -> page 0, size 20, 정렬 X, @PageableDefault
+- findByTitleContainingIgnoreCase -> 대소문자 무시, like 검색 기능
+
 ### 9주차 퀴즈 (게시판 페이지 - 글번호 & 삭제)
 
 - 컨트롤러로부터 시작 페이지를 전달
@@ -465,6 +470,8 @@ public void deleteBoard(Long id) {
 -> 기존 삭제 기능 방식과 동일하다. 폼은 DELETE 요청을 직접 보낼 수 없기 때문에 POST로 요청을 보내고 hidden 필드 _method=delete를 사용해 스프링에서 DELETE 요청으로 처리하도록 구현하였다.
 
 ## 10주차 (로그인과 로그아웃 - 1)
+
+- 
 
 ### 10주차 퀴즈 (입력값 필터링)
 
