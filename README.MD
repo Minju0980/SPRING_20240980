@@ -561,4 +561,45 @@ if(opt.isEmpty()) {
 
 -> model.addAttribute("email",email); -> board_view.html에서 이 값으로 권한 비교를 한다. 게시글 작성자와 현재 로그인 사용자가 같을 때만 수정/삭제 버튼이 보인다.
 
+## 12주차 (포트폴리오 완성)
 
+### 12주차 퀴즈 (세션 처리, 파일 업로드)
+
+- 2명이상 로그인 되도록 코드를 수정한다.
+- 로그인: 사용자마다 다른 이름 세션을 생성, 로그 아웃: 현재 사용자의 세션과 쿠키만 삭제
+
+- MemberController.java
+
+```java
+
+String email = request.getEmail(); // 이메일 얻기
+
+String sessionId = "USER_" + email + "_" + UUID.randomUUID().toString(); //이메일+랜덤값 섞어서-> 사용자마다 다른세션 이름
+```
+-> 이메일 + UUID를 조합하여 세션에 저장되는 userId(사용자 식별값)을 사용자별로 고유하게 생성하였다. 이를 통해 사용자 구분이 가능해졌다.
+
+```java
+if(session !=null){
+            session.invalidate(); //현재 브라우저(현재 사용자)의 세션만 무효화
+        }
+```
+-> 로그아웃을 수정하였다. invalidate()는 현재 브라우저(현재 사용자)의 세션을 무효화하고 JSESSIONID 쿠키를 MaxAge=0으로 설정해 삭제하였다. 또한 로그아웃 이후 getSession(true)로 새 세션을 만들지 않도록 하여 삭제된 쿠키가 다시 생성되지 않게 하였다.
+
+- 동일 파일 업로드시에 다른 이름으로 업로드
+- 파일 업로드 에러 페이지 처리
+
+- FileController.java
+
+```java
+//동일파일 있으면 _1,_2 붙이기
+int index = 1;
+while(Files.exists(filePath)){
+    filePath = uploadPath.resolve(sanitizedEmail + "_" + index + ".txt");
+    index++;
+}
+```
+-> int index = 1;은 파일명이 중복될 경우 붙일 번호 시작값이며 첫번째 중복 파일은 _1부터 시작이다.
+
+-> File.exists(filePath)는 현재 filePath경로에 파일이 이미 존재하는지 검사한다. true이면 같은 이름 파일이 이미 있다는 것이다.
+
+-> while문으로 파일이 존재하는 동안 계속 반복한다. index++으로 번호를 증가시켜 _1, _2와 같이 중복되지 않는 새로운 파일명을 생성한다. 동일 파일 업로드시에도 새 파일이 생성되도록 처리하였다.
