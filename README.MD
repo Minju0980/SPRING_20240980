@@ -174,6 +174,11 @@ function confirmClose() {
 
 ## 5주차 (블로그 게시판 - 1)
 
+- CRUD Operation 동작(주요 메서드 기능)/ HTTP Method 표준: POST,GET,PUT(PATCH),DELETE
+- 블로그 게시판 작성 -> article_list.html 생성
+- 빌더 패턴: 객체 인스턴스를 생성하는 패턴
+- DI 의존성 주입: @Service, @Controller, @Repository -> 컨테이너에 bean으로 자동 등록/ 생성자, 일반필드에서 주입할 수 있음음
+
 ### 5주차 퀴즈 (페이지 리다이렉트)
 
 - 기존 RestController는 주석처리/BlogController.java에 맵핑을 추가한다.
@@ -194,6 +199,10 @@ function confirmClose() {
 
 
 ## 6주차 (블로그 게시판 - 2)
+
+- ORM: 객체와 관계형 데이터를 매핑하기 위한 기술, 복잡한 SQL 쿼리를 직접 개발할 필요없음
+- POST 요청 -> 왜 PUT 요청을 사용해야 하나: POST는 다수 요청에 대해 다수 게시글이 생성됨/ PUT은 다수 요청에 대해 동일한 결과, 동일 데이터 수정
+- spring.mvc.hiddenmethod.filter.enabled=true -> application.properties 설정 파일을 수정, HTML 기본 폼 전송은 GET/POST 두 가지만 지원/ put, delete 지원하지 않았
 
 ### 6주차 퀴즈 (예외처리)
 
@@ -259,6 +268,11 @@ public class GlobalControllerAdvice {
 - error_page/article_type_error.html를 화면 디자인은 동일하게 만들었다.
 
 ## 7주차 (블로그 게시판 - 추가수정)
+
+- 프로필 수정(나의 프로젝트 소스코드)
+- board_list(게시판) 생성/ 사용자, 날짜, 조회수, 좋아요 필드 추가
+- BoardRepository 리포지토리 연동
+- board_view(글 내용 보기 페이지) 생성 <-board_list.html 재활용용
 
 ### 7주차 퀴즈 (게시판 페이지 - 글 수정)
 
