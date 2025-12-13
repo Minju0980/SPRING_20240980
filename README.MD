@@ -16,7 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 2주차 (개발환경 설정 및 테스트)
 
-- 스프링 부트 동작 과정에 대해서 배웠고 내부 컨테이너 전체 동작 과정에 대해서도 알게되었다.
+- 스프링 부트 동작 과정에 대해서 배웠고 내부 컨테이너 전체 동작 과정에 대해서도 알게되었음음
 - Thymeleaf 문법 -> 텍스트 출력: <span th: text="${data}">, $<...> 변수 표현식
 
 ### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
@@ -84,7 +84,7 @@ A few resources to get you started if this is your first Flutter project:
 ## 3주차 (포트폴리오 작성하기 - 프론트)
 
 - 개인 포트폴리오 템플릿 -> 포트폴리오 홈페이지 제작
-- 나의 전공/세부 분야, 프로필 수정, 상세페이지 수정정
+- 나의 전공/세부 분야, 프로필 수정, 상세페이지 수정
 
 ### 3주차 퀴즈 (상세 페이지 수정하기)
 
@@ -177,7 +177,7 @@ function confirmClose() {
 - CRUD Operation 동작(주요 메서드 기능)/ HTTP Method 표준: POST,GET,PUT(PATCH),DELETE
 - 블로그 게시판 작성 -> article_list.html 생성
 - 빌더 패턴: 객체 인스턴스를 생성하는 패턴
-- DI 의존성 주입: @Service, @Controller, @Repository -> 컨테이너에 bean으로 자동 등록/ 생성자, 일반필드에서 주입할 수 있음음
+- DI 의존성 주입: @Service, @Controller, @Repository -> 컨테이너에 bean으로 자동 등록/ 생성자, 일반필드에서 주입할 수 있음
 
 ### 5주차 퀴즈 (페이지 리다이렉트)
 
@@ -202,7 +202,7 @@ function confirmClose() {
 
 - ORM: 객체와 관계형 데이터를 매핑하기 위한 기술, 복잡한 SQL 쿼리를 직접 개발할 필요없음
 - POST 요청 -> 왜 PUT 요청을 사용해야 하나: POST는 다수 요청에 대해 다수 게시글이 생성됨/ PUT은 다수 요청에 대해 동일한 결과, 동일 데이터 수정
-- spring.mvc.hiddenmethod.filter.enabled=true -> application.properties 설정 파일을 수정, HTML 기본 폼 전송은 GET/POST 두 가지만 지원/ put, delete 지원하지 않았
+- spring.mvc.hiddenmethod.filter.enabled=true -> application.properties 설정 파일을 수정, HTML 기본 폼 전송은 GET/POST 두 가지만 지원/ put, delete 지원하지 않았음
 
 ### 6주차 퀴즈 (예외처리)
 
@@ -272,7 +272,7 @@ public class GlobalControllerAdvice {
 - 프로필 수정(나의 프로젝트 소스코드)
 - board_list(게시판) 생성/ 사용자, 날짜, 조회수, 좋아요 필드 추가
 - BoardRepository 리포지토리 연동
-- board_view(글 내용 보기 페이지) 생성 <-board_list.html 재활용용
+- board_view(글 내용 보기 페이지) 생성 <-board_list.html 재활용
 
 ### 7주차 퀴즈 (게시판 페이지 - 글 수정)
 
