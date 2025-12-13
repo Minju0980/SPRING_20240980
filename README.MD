@@ -16,6 +16,9 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 2주차 (개발환경 설정 및 테스트)
 
+- 스프링 부트 동작 과정에 대해서 배웠고 내부 컨테이너 전체 동작 과정에 대해서도 알게되었다.
+- Thymeleaf 문법 -> 텍스트 출력: <span th: text="${data}">, $<...> 변수 표현식
+
 ### 2주차 퀴즈(URL 맵핑과 컨트롤 추가하기)
 
 - 기존 hello.html 링크를 수정한다.
@@ -80,6 +83,9 @@ A few resources to get you started if this is your first Flutter project:
 
 ## 3주차 (포트폴리오 작성하기 - 프론트)
 
+- 개인 포트폴리오 템플릿 -> 포트폴리오 홈페이지 제작
+- 나의 전공/세부 분야, 프로필 수정, 상세페이지 수정정
+
 ### 3주차 퀴즈 (상세 페이지 수정하기)
 
 - 버튼을 클릭하면 현재 창을 닫는다.
@@ -117,6 +123,13 @@ function confirmClose() {
 -> '되돌아가기' 버튼을 눌렀을 때 창을 닫을지 물어보는 확인창을 띄우고 확인을 누르면 창을 닫고 홈으로 이동하게 만들었다.
 
 ## 4주차 (데이터베이스 연동 및 테스트)
+
+- 프로필 수정(기술&경험)
+- Thymeleaf 문법 -> 텍스트 출력 html 태그 인식(th:utext), Input/select 등 태그의 값 지정(th:value,th:field), 태그의 속성 값 여러 개 지정(링크는 @)(th:href)
+- 지역변수(태그 내에서만 동작)(th:with), 링크에 파라미터 추가하기(&를 ,로 표현)
+- JPA 역할 및 특징 -> 데이터 제어와 영속성 제공/ JPA의 대표 구현체(ORM)은 하이버네이트(Hibernate)
+- 데이터베이스 연동 확인
+- 구조 변경 -> View/ Controller에는 controller/ model에는 service, repository, domain 폴더 생성/ DTO 계층간 데이터 교환
 
 ### 4주차 퀴즈 (사용자 추가 및 출력하기)
 
