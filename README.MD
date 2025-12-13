@@ -522,6 +522,14 @@ public void deleteBoard(Long id) {
 
 ## 11주차 (로그인과 로그아웃 - 2)
 
+- 스프링 세션 -> 스프링 부트 환경의 세션 관리, 세션 쿠키: 임시, 일회성/ 세션ID를 쿠키로 저장, 서버 부하 적음
+- 스프링 부트 내부 보안 필터(다양한 보안 필터 존재)
+- commitSession -> JSESSIONID 값 생성/ JSESSIONID -> 쿠키에 저장된 문자열, 서버 기반 세션 식별자
+- 프로필 수정(나의 팀원/ 추천글, 후기)
+- 로그인 과정에 세션 생성
+- invalidate()-> 세션 무효화, setPath -> 쿠키의 경로, setMaxAge(0) -> 쿠키 만료 0이면 삭제
+- .maximumSessions() 사용자별 세션 최대수/ .maxSessionsPreventsLogin(true) -> 동시 세션 제한
+
 ### 11주차 퀴즈 (게시판 수정하기)
 
 - 게시글 추가(글 저장하기)
@@ -600,6 +608,9 @@ if(opt.isEmpty()) {
 -> model.addAttribute("email",email); -> board_view.html에서 이 값으로 권한 비교를 한다. 게시글 작성자와 현재 로그인 사용자가 같을 때만 수정/삭제 버튼이 보인다.
 
 ## 12주차 (포트폴리오 완성)
+
+- toAbsolutePath() -> 절대 경로로 바꿈, resolve -> 폴더에 하위 경로나 파일명을 붙여서 새로운 경로를 만드는 기능
+- catch안에는 예외 처리
 
 ### 12주차 퀴즈 (세션 처리, 파일 업로드)
 
