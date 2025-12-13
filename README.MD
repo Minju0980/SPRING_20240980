@@ -401,5 +401,5 @@ model.addAttribute("startNum", startNum); //추가된 시작 번호
 
 -> 현재 페이지에 보이는 리스트 순서를 보여줘야 하기 때문에 페이지 시작 번호(startNum) + 현재 행 인덱스(stat.index)로 계산한다.
 
--> 예) 1페이지(page=0) startNum=1 -> 1~5, 2패이지(page=1) s-> 예) 1페이지(page=0) startNum=1 -> 1~5, 2페이지(page=1) startNum=6 -> 6~10 
-### 12주차 퀴즈
+-> 예) 1페이지(page=0) startNum=1 -> 1~5, 
+
