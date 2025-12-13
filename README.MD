@@ -436,7 +436,7 @@ public void deleteBoard(Long id) {
 ```
 -> 기존 삭제 기능 방식과 동일하다. 폼은 DELETE 요청을 직접 보낼 수 없기 때문에 POST로 요청을 보내고 hidden 필드 _method=delete를 사용해 스프링에서 DELETE 요청으로 처리하도록 구현하였다.
 
-## 10주차 (로그인과 로그아웃)
+## 10주차 (로그인과 로그아웃 - 1)
 
 ### 10주차 퀴즈 (입력값 필터링)
 
@@ -481,5 +481,83 @@ public void deleteBoard(Long id) {
 
 - Controller에 @Valid/ Service에 @Validated 및 메서드 파라미터 @Valid를 넣어서 DTO검증이 실제 실행되도록 하였다.
 
+## 11주차 (로그인과 로그아웃 - 2)
+
+### 11주차 퀴즈 (게시판 수정하기)
+
+- 게시글 추가(글 저장하기)
+- 현재 로그인한 사용자로 글의 작성자를 저장한다.
+
+- BlogController.java
+
+```java
+@PostMapping("/api/boards") // 글쓰기 게시판 저장
+public String addboards(@ModelAttribute AddArticleRequest request,HttpSession session) {
+
+        //로그인 여부 확인 (안되어 있으면 로그인 페이지로)
+        String email = (String) session.getAttribute("email");
+        if(email == null){
+            return "redirect:/member_login";
+        }
+
+        //작성자 = 현재 로그인한 사용자(email)
+        request.setUser(email);
+
+        //기존 저장 로직
+        blogService.save(request);
+
+        return "redirect:/board_list"; // .HTML 연결
+    }
+
+```
+-> 로그인 성공 시 세션에 저장해둔 email값을 꺼낸다. 이 값이 있으면 로그인을 한 상태이고 없으면 로그인을 안 한 상태이다. 로그인하지 않은 사용자가 글 저장 요청을 하면 글 저장을 금지하고 로그인 페이지로 강제 이동한다.
+
+-> request.setUser(email); 은 게시글의 작성자를 사용자가 폼에서 보낸 값이 아니라 서버에 있는 로그인 정보 email로 강제 설정한다는 것이다.
+
+-> DTO를 Board 엔티티로 변환한 이후 DB에 게시글을 저장한다. 글 저장 완료후 게시글 목록 화면으로 이동한다.
+
+- 게시글 내용 보기
+- 글의 작성자만 수정/삭제 버튼을 보여준다.
+
+- board_view.html
+
+```html
+<tr th:if ="${boards.user} == ${email}">
+...
+</tr>
+
+<tr>
+    <td>
+        <a class = "btn btn-secondary" th:href="@{/board_list}">목록으로</a>
+    </td>
+</tr>
+```
+-> boards.user(글작성자) == email(자)일 때만 수정/삭제 버튼이 보이도록 하였다.
+
+-> '목록으로'라는 버튼은 항상 보이도록 하였다.
+
+- BlogController.java
+
+```java
+if(opt.isEmpty()) {
+            return "/error_page/article_error"; //오류 처리 페이지로 이동
+        }
+
+        //게시글
+        Board board = opt.get();
+        model.addAttribute("boards",board); 
+
+       //로그인한 사용자 이메일 추가
+       String email = (String) session.getAttribute("email");
+       model.addAttribute("email",email);
+
+        return "board_view"; 
+
+```
+-> opt는 DB에서 id에 해당하는 게시글을 조회한 결과를 Optional로 감싼 객체이다.
+
+-> 로그인 성공 시 세션에 저장해 둔 값을 꺼내온다. 로그인 상태이면 이메일이 있고 비로그인 상태이면 null이다.
+
+-> model.addAttribute("email",email); -> board_view.html에서 이 값으로 권한 비교를 한다. 게시글 작성자와 현재 로그인 사용자가 같을 때만 수정/삭제 버튼이 보인다.
 
 
