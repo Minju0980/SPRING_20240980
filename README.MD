@@ -182,7 +182,7 @@ function confirmClose() {
 
 ## 6주차 (블로그 게시판 - 2)
 
-### 6주차 퀴즈(예외처리)
+### 6주차 퀴즈 (예외처리)
 
 - 에러 페이지를 다시 확인, BlogController.java를 수정한다.
 - 새로운 예외용 에러 페이지가 필요하다. (화면 디자인은 동일)/ @ControllerAdvice를 등록하여 구현한다.
@@ -245,9 +245,99 @@ public class GlobalControllerAdvice {
 
 - error_page/article_type_error.html를 화면 디자인은 동일하게 만들었다.
 
-## 7주차
+## 7주차 (블로그 게시판 - 추가수정)
 
-### 7주차 퀴즈
+### 7주차 퀴즈 (게시판 페이지 - 글 수정)
+
+- 글 수정 버튼 동장을 위한 맵핑을 컨트롤러에 등록한다.
+- /board_edit을 새로 등록한다.
+- board_list.html로 연결한다.(참고: article_edit를 재활용한다.)
+
+- BlogController.java
+```java
+@GetMapping("/board_edit/{id}")
+    public String board_edit(Model model, @PathVariable Long id) {
+        Optional<Board> opt = blogService.findById(id);
+        if(opt.isEmpty()) {
+            return "error_page/article_error";
+        }
+         model.addAttribute("boards", opt.get());
+        return "board_edit";
+    }
+```
+-> list라는 변수는 여러개의 데이터를 의미함, 단일 객체를 담는 Optional<Board>의 의미에 맞게 list를 opt(Optional)이라는 변수명으로 변경하였다.
+
+-> 게시글 id를 전달받아서 DB에서 해당 글을 조회한다.
+
+-> 해당 글이 있으면 수정화면(board_edit.html)으로 이동하고 없으면 에러 페이지로 보낸다.
+
+```java
+@PutMapping("/api/board_edit/{id}")
+    public String updateBoard(@PathVariable Long id, @ModelAttribute AddArticleRequest request){
+        blogService.updateBoard(id, request);
+        return "redirect:/board_list";
+    }
+```
+
+-> 수정 폼에서 넘어온 데이터를 AddArticleRequest로 전달받는다. 
+
+-> 서비스 계층에서 해당 게시글의 정보를 DB에 반영하여 수정하고 수정완료 후 게시글 목록으로 이동한다.  
+
+- 글 수정을 위한 화면을 만들었다.(참고: article_edit와 board_list.html을 재활용한다.)
+
+- board_edit.html
+
+```html
+<form th:action="@{/api/board_edit/{id}(id=${boards.id})}" method="post">
+                    <input type="hidden" name="_method" value="put">
+
+                    <div class="form-group">
+                        <label for="title">제목</label>
+                        <input type="text" class="form-control" id="title" name="title" th:value = "${boards.title}" required>
+                    </div>
+
+                    ...
+
+                    <button type="submit" class="btn btn-primary">수정완료</button>
+                    <a th:href="@{/board_list}" class="btn btn-secondary">목록으로</a>
+                </form>
+
+
+```
+-> article_edit과 board_list 구조를 재활용하였다. 기존 title, content 필드 외에도 Board에 있는 4개의 필드(user/newdate/count/likec)에 대한 입력 항목을 추가하였다.
+
+-> 해당 폼은 수정된 데이터를 서버로 전송하는 폼이다. <input type="hidden" name="_method" value="put">은 HTML 폼의 POST 요청을 PUT 요청으로 변환하기 위해 사용하였다.
+
+-> 게시글 제목을 수정할 수 있는 입력창을 만들었고 다른 필드들도 이와 같은 방식으로 입력필드를 만들었다. 모든 입력값은 AddArticleRequest의 필드와 매핑된다.
+
+-> '수정완료' 버튼 클릭시 폼 전체가 서버로 전송된다./ 수정하지 않고 게시글 목록 화면으로 이동할 수 있도록 '목록으로'라는 버튼도 만들었다.
+
+- 글 수정을 위해 서비스 로직을 수정한다.
+- 선행: AddArticleRequest.java를 수정한다.(title과 content 이외 나머지 변수들도 추가)
+
+- AddArticleRequest.java
+```java
+private String title;
+    private String content;
+    private String user;
+    private String newdate;
+    private String count;
+    private String likec;
+
+    public Board toEntity(){ // Article 객체 생성
+        return Board.builder()
+            .title(title)
+            .content(content)
+            .user(user)
+            .newdate(newdate)
+            .count(count)
+            .likec(likec)
+            .build();
+```
+
+-> 게시글에 필요한 데이터들로, HTML 수정/등록 폼에서 입력받은 값들이 저장되는 변수들이다. 이 클래스는 요청 데이터(DTO) 역할을 한다.
+
+-> DTO를 Entity로 변환, 빌더 패턴으로 객체를 생성하였다. 폼에 입력된 값들을 DTO에 담고 DTO를 Entity로 변환하여 DB에 저장한다.
 
 ## 9주차
 
